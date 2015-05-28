@@ -1,0 +1,57 @@
+body{
+	background-color: white;
+	margin:40px;	
+	font-family: Arial;
+	font-size:13px;
+}
+
+a{
+	color:rgb(59,160,59);
+	text-decoration: none;
+	font-family: Arial;
+}
+
+h1{
+	font-family: Arial;
+	color:rgb(59,160,59);
+	border-bottom: solid 1px rgb(59,160,59);
+	width:60%;
+	font-size:18px;
+}
+
+div.message{
+	background-color: rgb(210,210,210);
+	padding:10px;
+	border: solid 1px rgb(59,160,59);
+}
+
+div.message div.error{
+	color:red;
+}
+
+table, label, td{
+	font-family: Arial;
+	font-size:13px;
+}
+
+table.list {
+	border: solid 1px rgb(59,160,59);
+	width:100%;
+}
+
+table.list td{
+	padding:15px;
+}
+
+table.list td.header{
+	background-color:rgb(180,210,180);
+	width:180px;
+}
+
+table.list td.label{
+	width:180px;
+}
+
+table.list td.content{
+	background-color:rgb(180,210,180);
+}

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO_8859-1"?>
+<bean:beans xmlns:bean="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.forum.webapp" />
+
+	<bean:bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<bean:property name="sessionFactory" ref="sessionFactory" />
+	</bean:bean>
+
+	<bean:bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean:bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<bean:property name="dataSource">
+			<bean:ref bean="dataSource" />
+		</bean:property>
+		<bean:property name="hibernateProperties">
+			<bean:props>
+				<bean:prop key="hibernate.dialect">${jdbc.hibernate.dialect}
+				</bean:prop>
+				<bean:prop key="hibernate.hbm2ddl.auto">${jdbc.hibernate.startup_action}
+				</bean:prop>
+				<bean:prop key="hibernate.connection.charSet">UTF-8</bean:prop>
+
+				<bean:prop key="hibernate.connection.username">${jdbc.username}</bean:prop>
+				<bean:prop key="hibernate.connection.password">${jdbc.password}</bean:prop>
+				<bean:prop key="hibernate.connection.driver_class">${jdbc.driverClassName}</bean:prop>
+				<bean:prop key="hibernate.connection.url">${jdbc.url}
+				</bean:prop>
+				<bean:prop key="hibernate.show_sql">${jdbc.hibernate.show_sql}</bean:prop>
+				<bean:prop key="hibernate.show_sql">${jdbc.hibernate.format_sql}</bean:prop>
+
+			</bean:props>
+		</bean:property>
+		<bean:property name="annotatedClasses">
+			<bean:list>
+				<bean:value>com.forum.webapp.entities.MessageEntity
+				</bean:value>
+				<bean:value>com.forum.webapp.entities.ShareEntity</bean:value>
+				<bean:value>com.forum.webapp.entities.TopicEntity</bean:value>
+				<bean:value>com.forum.webapp.entities.UserEntity</bean:value>
+			</bean:list>
+		</bean:property>
+	</bean:bean>
+
+	<bean:bean id="hibernateInterceptor"
+		class="org.springframework.orm.hibernate3.HibernateInterceptor"
+		autowire="byName" />
+
+	<bean:bean id="messageDaoTarget" class="com.forum.webapp.dao.impl.MessageDao"
+		autowire="byName" />
+	<bean:bean id="userDaoTarget" class="com.forum.webapp.dao.impl.UserDao"
+		autowire="byName" />
+	<bean:bean id="topicDaoTarget" class="com.forum.webapp.dao.impl.TopicDao"
+		autowire="byName" />
+
+	<bean:bean id="messageDao"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<bean:property name="proxyInterfaces">
+			<bean:value>com.forum.webapp.dao.IMessageDao</bean:value>
+		</bean:property>
+		<bean:property name="interceptorNames">
+			<bean:list>
+				<bean:value>hibernateInterceptor</bean:value>
+				<bean:value>messageDaoTarget</bean:value>
+			</bean:list>
+		</bean:property>
+	</bean:bean>
+	<bean:bean id="userDao"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<bean:property name="proxyInterfaces">
+			<bean:value>com.forum.webapp.dao.IUserDao</bean:value>
+		</bean:property>
+		<bean:property name="interceptorNames">
+			<bean:list>
+				<bean:value>hibernateInterceptor</bean:value>
+				<bean:value>userDaoTarget</bean:value>
+			</bean:list>
+		</bean:property>
+	</bean:bean>
+	<bean:bean id="topicDao"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<bean:property name="proxyInterfaces">
+			<bean:value>com.forum.webapp.dao.ITopicDao</bean:value>
+		</bean:property>
+		<bean:property name="interceptorNames">
+			<bean:list>
+				<bean:value>hibernateInterceptor</bean:value>
+				<bean:value>topicDaoTarget</bean:value>
+			</bean:list>
+		</bean:property>
+	</bean:bean>
+</bean:beans>
