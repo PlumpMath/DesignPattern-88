@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<test.server.host>localhost</test.server.host>
-		<test.server.port>18080</test.server.port>
+		<test.server.port>38080</test.server.port>
 		<jetty.port>28080</jetty.port>
 		
         <java.version>1.7</java.version>
