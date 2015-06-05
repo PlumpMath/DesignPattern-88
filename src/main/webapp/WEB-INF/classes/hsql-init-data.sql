@@ -1,25 +1,27 @@
-insert into users (name, firstName, email, password) values ('Dupont', 'Jérôme', 'jerome@dupont.com', 'jerome');
+insert into users (name, firstName, email, password) values ('Dupont', 'J√©r√¥me', 'jerome@dupont.com', 'jerome');
 insert into users (name, firstName, email, password) values ('Legrand', 'Didier', 'didier@legrand.com', 'didier');
-insert into users (name, firstName, email, password) values ('Grangé', 'Bertrand', 'bertrand@grange.com', 'bertrand');
+insert into users (name, firstName, email, password) values ('Grang√©', 'Bertrand', 'bertrand@grange.com', 'bertrand');
 insert into users (name, firstName, email, password) values ('Hautbois', 'Sylvie', 'sylvie@hautbois.com', 'sylvie');
+insert into users (name, firstName, email, password) values ('toto', 'toto', 'toto', 'toto');
 
 
-insert into topics (title, public) values ('Voyage de fin d''année',true);
+insert into topics (title, publicTopic) values ('Voyage de fin d''ann√©e',true);
 
-insert into messages (text, dateAndTime, owner, topic) values ('Où est-ce que vous voulez partir pour le voyage de la boite cette année ?', NOW(), 0, 0);
-insert into messages (text, dateAndTime, owner, topic) values ('Moi ça m''est égal, tant qu''il y fait beau et chaud !', NOW(), 1, 0);
-insert into messages (text, dateAndTime, owner, topic) values ('J''ai toujours rêvé de visiter Madère...', NOW(), 2, 0);
-insert into messages (text, dateAndTime, owner, topic) values ('Madère ? C''est où ça ? Moi j''aimerais mieux aller en Norvège ou en Suède.', NOW(), 3, 0);
-insert into messages (text, dateAndTime, owner, topic) values ('Bon, je vois avec l''agence de voyage ce qui est possible dans notre budget, et je reviens vers vous.', NOW(), 0, 0);
+insert into messages (text, dateAndTime, ownerId, topicId) values ('O√π est-ce que vous voulez partir pour le voyage de la boite cette ann√©e ?', NOW(), 1, 1);
+insert into messages (text, dateAndTime, ownerId, topicId) values ('Moi √ßa m''est √©gal, tant qu''il y fait beau et chaud !', NOW(), 2, 1);
+insert into messages (text, dateAndTime, ownerId, topicId) values ('J''ai toujours r√™v√© de visiter Mad√®re...', NOW(), 3, 1);
+insert into messages (text, dateAndTime, ownerId, topicId) values ('Mad√®re ? C''est o√π √ßa ? Moi j''aimerais mieux aller en Norv√®ge ou en Su√®de.', NOW(), 4, 1);
+insert into messages (text, dateAndTime, ownerId, topicId) values ('Bon, je vois avec l''agence de voyage ce qui est possible dans notre budget, et je reviens vers vous.', NOW(), 1, 1);
 
 
-insert into topics (title, public) values ('Anniversaire Jéjé',false);
+insert into topics (title, publicTopic) values ('Anniversaire J√©j√©',false);
 
-insert into shares (topic, reader) values (1, 1);
-insert into shares (topic, reader) values (1, 2);
-insert into shares (topic, reader) values (1, 3);
+insert into shares (topicId, readerId) values (2, 2);
+insert into shares (topicId, readerId) values (2, 3);
+insert into shares (topicId, readerId) values (2, 4);
+insert into shares (topicId, readerId) values (2, 5);
 
-insert into messages (text, dateAndTime, owner, topic) values ('C''est bientôt l''anniv de Jéjé. Qui pour un cadeau ?', NOW(), 2, 1);
-insert into messages (text, dateAndTime, owner, topic) values ('Son GPS est mort depuis la semaine dernière. Ca pourrait le faire, non ?', NOW(), 3, 1);
-insert into messages (text, dateAndTime, owner, topic) values ('C''est un peu cher je trouve...', NOW(), 1, 1);
-insert into messages (text, dateAndTime, owner, topic) values ('T''es pas un peu radin Didier ? On va bien être une dizaine sur le cadeau !', NOW(), 2, 1);
+insert into messages (text, dateAndTime, ownerId, topicId) values ('C''est bient√¥t l''anniv de J√©j√©. Qui pour un cadeau ?', NOW(), 3, 2);
+insert into messages (text, dateAndTime, ownerId, topicId) values ('Son GPS est mort depuis la semaine derni√®re. Ca pourrait le faire, non ?', NOW(), 4, 2);
+insert into messages (text, dateAndTime, ownerId, topicId) values ('C''est un peu cher je trouve...', NOW(), 2, 2);
+insert into messages (text, dateAndTime, ownerId, topicId) values ('T''es pas un peu radin Didier ? On va bien √™tre une dizaine sur le cadeau !', NOW(), 3, 2);

@@ -36,7 +36,8 @@ public class AbstractController {
 
     @ExceptionHandler(DuplicateKeyException.class)
     @ResponseBody
-    public String handleDuplicateKeyException(final DuplicateKeyException ex, final HttpServletRequest request) {
+    public String handleDuplicateKeyException(final DuplicateKeyException ex,
+            final HttpServletRequest request) {
         // TODO.
         LOGGER.error(ex);
         return ClassUtils.getShortName(ex.getClass());

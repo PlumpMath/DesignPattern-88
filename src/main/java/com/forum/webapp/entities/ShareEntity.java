@@ -1,6 +1,5 @@
 package com.forum.webapp.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,43 +11,39 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name = "shares")
-@NamedQueries(value = {
-                @NamedQuery(name = "canReadTopic", query = "from ShareEntity where topic = :topic and reader = :reader")
-})
+@NamedQueries(value = { @NamedQuery(name = "canReadTopic", query = "from ShareEntity where topicId = :topic and readerId = :reader") })
 public class ShareEntity implements IEntity {
 
-	private Long _id;
+    private Long id;
 
-	private Long _topicId;
+    private Long topicId;
 
-	private Long _readerId;
+    private Long readerId;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
-		return _id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(final Long id) {
-		_id = id;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	@Column(name = "topic")
-	public Long getTopic() {
-		return _topicId;
-	}
+    public Long getTopicId() {
+        return topicId;
+    }
 
-	public void setTopic(Long topicId) {
-		_topicId = topicId;
-	}
+    public void setTopicId(Long topicId) {
+        this.topicId = topicId;
+    }
 
-	@Column(name = "reader")
-	public Long getReader() {
-		return _readerId;
-	}
+    public Long getReaderId() {
+        return readerId;
+    }
 
-	public void setReader(Long readerId) {
-		_readerId = readerId;
-	}
+    public void setReaderId(Long readerId) {
+        this.readerId = readerId;
+    }
 
 }

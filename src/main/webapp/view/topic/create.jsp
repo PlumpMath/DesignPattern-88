@@ -33,6 +33,10 @@
               <td><input type="text" name="title" /></td>
           </tr>
           <tr>
+              <td class="label"><fmt:message key="topic.create.public" /></td>
+              <td><input type="checkbox" name="publicTopic" /></td>
+          </tr>
+          <tr>
               <td colspan="2" align="center">
                   <input type="submit" value="<fmt:message key="topic.create.confirm" />" />
               </td>

@@ -12,43 +12,52 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name = "topics")
-@NamedQueries(value = {
-		@NamedQuery(name = "listTopics", query = "from TopicEntity e where public = true or "
-        + "exists (select 1 from ShareEntity where topic = e.id and reader = :user)") })
+@NamedQueries(value = { @NamedQuery(name = "listTopics", query = "from TopicEntity e where creatorId = :user or publicTopic = true or "
+        + "exists (select 1 from ShareEntity where topicId = e.id and readerId = :user)") })
 public class TopicEntity implements IEntity {
 
-	private Long _id;
+    private Long id;
 
-	private String _title;
+    private String title;
 
-	private Boolean _public = Boolean.TRUE;
+    private Long creatorId;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
-		return _id;
-	}
+    private Boolean publicTopic = Boolean.TRUE;
 
-	public void setId(final Long id) {
-		_id = id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
+        return id;
+    }
 
-	@Column(name = "title", length = 200, nullable = false)
-	public String getTitle() {
-		return _title;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	public void setTitle(String title) {
-		_title = title;
-	}
+    @Column(length = 200, nullable = false)
+    public String getTitle() {
+        return title;
+    }
 
-	@Column(name = "public", nullable = false)
-	public Boolean isPublic() {
-		return _public;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setPublic(Boolean isPublic) {
-		_public = isPublic;
-	}
+    public Long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    @Column(nullable = false)
+    public Boolean getPublicTopic() {
+        return publicTopic;
+    }
+
+    public void setPublicTopic(Boolean publicTopic) {
+        this.publicTopic = publicTopic;
+    }
 
 }

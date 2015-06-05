@@ -8,9 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,16 +26,13 @@ import com.forum.webapp.web.models.User;
 @Controller
 public class NoSessionController extends AbstractController {
 
-    private final static Logger LOGGER = Logger.getLogger(NoSessionController.class);
-
     public final static String USER_SESSION_ATTRIBUTES = "user";
 
-    private IUserService _userService;
+    private IUserService userService;
 
     @Autowired(required = true)
-    @Qualifier("userService")
     public void setUserService(final IUserService userService) {
-        _userService = userService;
+        this.userService = userService;
     }
 
     @InitBinder
@@ -49,7 +44,8 @@ public class NoSessionController extends AbstractController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView loginForm(@RequestParam(value = "error", required = false) final String error,
+    public ModelAndView loginForm(
+            @RequestParam(value = "error", required = false) final String error,
             final HttpSession session) {
         session.invalidate();
 
@@ -65,7 +61,7 @@ public class NoSessionController extends AbstractController {
     @Transactional
     public ModelAndView login(@RequestParam("login") final String login,
             @RequestParam("password") final String password, final HttpSession session) {
-        final User user = _userService.login(login, password);
+        final User user = userService.login(login, password);
         if (null == user) {
             final Map<String, Object> model = new HashMap<String, Object>();
             model.put("messageType", "error");
@@ -89,9 +85,8 @@ public class NoSessionController extends AbstractController {
 
     @RequestMapping(value = "/subscribe", method = RequestMethod.POST)
     @Transactional
-    public ModelAndView subscribe(final User user, final BindingResult result, final HttpServletResponse response) {
-        Long userId = _userService.create(user);
-
+    public ModelAndView subscribe(final User user, final BindingResult result,
+            final HttpServletResponse response) {
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("messageType", "success");
         model.put("messageKey", "user.subscribe.success");

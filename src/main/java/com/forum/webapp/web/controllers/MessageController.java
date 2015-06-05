@@ -1,6 +1,6 @@
 package com.forum.webapp.web.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -19,21 +19,21 @@ import com.forum.webapp.web.models.User;
 @SessionAttributes(NoSessionController.USER_SESSION_ATTRIBUTES)
 public class MessageController extends AbstractController {
 
-    private IMessageService _messageService;
+    private IMessageService messageService;
 
     @Autowired(required = true)
-    @Qualifier("messageService")
-    public void setMessageService(IMessageService calendarService) {
-        _messageService = calendarService;
+    public void setMessageService(IMessageService messageService) {
+        this.messageService = messageService;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @Transactional
     public ModelAndView create(final Message message, final BindingResult result,
-            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user) throws Exception {
+            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
+            throws Exception {
         checkSession(user);
         message.setOwnerId(user.getId());
-        _messageService.create(message);
+        messageService.create(message);
         return new ModelAndView("redirect:" + "/html/topic/" + message.getTopicId());
     }
 

@@ -1,50 +1,44 @@
 package com.forum.webapp.dao.impl;
 
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.hibernate.Query;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.forum.webapp.dao.IMessageDao;
 import com.forum.webapp.entities.MessageEntity;
+import com.forum.webapp.repos.MessageRepository;
+import com.google.common.collect.Lists;
 
 @Transactional
-@Repository("messageDao")
-public class MessageDao extends CustomHibernateDaoSupport implements IMessageDao {
+@Component
+public class MessageDao implements IMessageDao {
+
+    @Autowired
+    private MessageRepository messageRepository;
+
+    public void setMessageRepository(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
 
     public Long create(final MessageEntity entity) {
         entity.setDateAndTime(new GregorianCalendar());
-        getSession().save(entity);
+        messageRepository.save(entity);
         return entity.getId();
     }
 
     public MessageEntity get(final Long id) {
-        return (MessageEntity) getSession().get(MessageEntity.class, id);
+        return messageRepository.findOne(id);
     }
 
     public List<MessageEntity> list(final Long topicId) {
-        final Query query = getSession().getNamedQuery("listMessages").setLong("topicId", topicId);
-        @SuppressWarnings("unchecked")
-        final List<MessageEntity> messages = (List<MessageEntity>) query.list();
-        final List<MessageEntity> result = new LinkedList<MessageEntity>();
-        for (MessageEntity message : messages) {
-            result.add(message);
-        }
-        return result;
+        return messageRepository.findByTopicIdOrderById(topicId);
     }
 
     public List<MessageEntity> listAll() {
-        final Query query = getSession().getNamedQuery("listAllMessages");
-        @SuppressWarnings("unchecked")
-        final List<MessageEntity> messages = (List<MessageEntity>) query.list();
-        final List<MessageEntity> result = new LinkedList<MessageEntity>();
-        for (MessageEntity message : messages) {
-            result.add(message);
-        }
-        return result;
+        return Lists.newLinkedList(messageRepository.findAll());
     }
 
 }

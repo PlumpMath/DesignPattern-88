@@ -17,6 +17,12 @@
 	<context:property-placeholder location="classpath:jdbc.properties"
 		ignore-resource-not-found="false" system-properties-mode="OVERRIDE" />
 
+
+	<jdbc:embedded-database id="dataSource" type="H2" >
+	  	<jdbc:script location="classpath:hsql-init-schema.sql"/>
+	  	<jdbc:script location="classpath:hsql-init-data.sql"/>
+	</jdbc:embedded-database>
+
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.forum.webapp.web" />
 
@@ -48,9 +54,6 @@
 		<bean:property name="suffix" value=".jsp" />
 	</bean:bean>
 
-	<jdbc:embedded-database id="dataSource" type="HSQL" >
-	  	<jdbc:script location="classpath:hsql-init-schema.sql"/>
-	  	<jdbc:script location="classpath:hsql-init-data.sql"/>
-	</jdbc:embedded-database>
+	
 	<bean:import resource="classpath:applicationContext.xml" />
 </bean:beans>

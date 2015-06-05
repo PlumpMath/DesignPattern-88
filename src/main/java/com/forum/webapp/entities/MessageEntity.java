@@ -9,70 +9,64 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
-
 @Entity
 @Table(name = "messages")
-@NamedQueries(value = {
-        @NamedQuery(name = "listMessages", query = "from MessageEntity where topicId = :topicId order by id"),
-@NamedQuery(name = "listAllMessages", query = "from MessageEntity order by id")})
 public class MessageEntity implements IEntity {
 
-    private Long _id;
+    private Long id;
 
-    private String _text;
+    private String text;
 
-    private Calendar _dateAndTime;
+    private Calendar dateAndTime;
 
-    private Long _ownerId;
+    private Long ownerId;
 
-    private Long _topicId;
+    private Long topicId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
-        return _id;
+        return id;
     }
 
     public void setId(final Long id) {
-        _id = id;
+        this.id = id;
     }
 
-    @Column(name = "text", length = 5000, nullable = false)
+    @Column(length = 5000, nullable = false)
     public String getText() {
-        return _text;
+        return text;
     }
 
     public void setText(final String text) {
-        this._text = text;
+        this.text = text;
     }
 
-    @Column(name = "dateAndTime", nullable = false)
+    @Column(nullable = false)
     public Calendar getDateAndTime() {
-		return _dateAndTime;
-	}
+        return dateAndTime;
+    }
 
-	public void setDateAndTime(Calendar dateAndTime) {
-		_dateAndTime = dateAndTime;
-	}
+    public void setDateAndTime(Calendar dateAndTime) {
+        this.dateAndTime = dateAndTime;
+    }
 
-	@Column(name = "owner", nullable = false)
+    @Column(nullable = false)
     public Long getOwnerId() {
-        return _ownerId;
+        return ownerId;
     }
 
     public void setOwnerId(final Long userId) {
-        _ownerId = userId;
+        ownerId = userId;
     }
 
-    @Column(name = "topic", nullable = false)
-	public Long getTopicId() {
-		return _topicId;
-	}
+    @Column(nullable = false)
+    public Long getTopicId() {
+        return topicId;
+    }
 
-	public void setTopicId(Long topic) {
-		_topicId = topic;
-	}
+    public void setTopicId(Long topic) {
+        this.topicId = topic;
+    }
 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -28,26 +27,23 @@ import com.forum.webapp.web.models.User;
 @SessionAttributes(NoSessionController.USER_SESSION_ATTRIBUTES)
 public class TopicController extends AbstractController {
 
-    private ITopicService _topicService;
-    private IMessageService _messageService;
-    private IUserService _userService;
+    private ITopicService topicService;
+    private IMessageService messageService;
+    private IUserService userService;
 
     @Autowired(required = true)
-    @Qualifier("topicService")
-    public void setTopicService(final ITopicService eventService) {
-        _topicService = eventService;
+    public void setTopicService(final ITopicService topicService) {
+        this.topicService = topicService;
     }
 
     @Autowired(required = true)
-    @Qualifier("messageService")
     public void setMessageService(final IMessageService messageService) {
-        _messageService = messageService;
+        this.messageService = messageService;
     }
 
     @Autowired(required = true)
-    @Qualifier("userService")
     public void setUserService(final IUserService userService) {
-        _userService = userService;
+        this.userService = userService;
     }
 
     @InitBinder
@@ -55,24 +51,29 @@ public class TopicController extends AbstractController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create(@ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user) throws Exception {
+    public String create(
+            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
+            throws Exception {
         checkSession(user);
         return "topic/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ModelAndView add(final Topic topic,
-            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user) throws Exception {
+            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
+            throws Exception {
         checkSession(user);
-        final Long topicId = _topicService.create(topic);
+        topic.setCreatorId(user.getId());
+        final Long topicId = topicService.create(topic);
         return get(topicId, user);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView list(@ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
+    public ModelAndView list(
+            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
             throws Exception {
         checkSession(user);
-        final List<Topic> topics = _topicService.list(user.getId());
+        final List<Topic> topics = topicService.list(user.getId());
         final Map<String, Object> model = new HashMap<String, Object>();
         model.put("topics", topics);
         return new ModelAndView("topic/list", model);
@@ -80,16 +81,17 @@ public class TopicController extends AbstractController {
 
     @RequestMapping(value = "/{topicId}", method = RequestMethod.GET)
     public ModelAndView get(@PathVariable("topicId") final long topicId,
-            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user) throws Exception {
+            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
+            throws Exception {
         checkSession(user);
-        final Topic topic = _topicService.get(topicId);
+        final Topic topic = topicService.get(topicId);
         if (null == topic) {
             final ModelAndView result = list(user);
             result.getModel().put("messageKey", "topic.list.invalid.topic");
             result.getModel().put("messageType", "error");
             return result;
         }
-        final List<Message> messages = _messageService.list(topicId);
+        final List<Message> messages = messageService.list(topicId);
 
         final Map<Long, User> users = new HashMap<Long, User>();
         User owner;
@@ -97,7 +99,7 @@ public class TopicController extends AbstractController {
             if (users.containsKey(message.getOwnerId())) {
                 owner = users.get(message.getOwnerId());
             } else {
-                owner = _userService.get(message.getOwnerId());
+                owner = userService.get(message.getOwnerId());
                 users.put(owner.getId(), owner);
             }
             message.setOwner(owner);

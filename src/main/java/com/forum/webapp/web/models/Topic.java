@@ -1,58 +1,67 @@
 package com.forum.webapp.web.models;
 
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.Size;
-
 import com.forum.webapp.entities.TopicEntity;
 
 public class Topic implements IModel {
 
-	private Long _id;
+    private Long id;
 
-	private String _title;
+    private String title;
 
-	private boolean _isPublic;
+    private Long creatorId;
 
-	public Topic() {
-		super();
-	}
+    private boolean publicTopic = true;
 
-	public Topic(final TopicEntity entity) {
-		_id = entity.getId();
-		_title = entity.getTitle();
-	}
+    public Topic() {
+        super();
+    }
 
-	public long getId() {
-		return _id;
-	}
+    public Topic(final TopicEntity entity) {
+        id = entity.getId();
+        title = entity.getTitle();
+        publicTopic = entity.getPublicTopic();
+        creatorId = entity.getCreatorId();
+    }
 
-	public void setId(final Long id) {
-		_id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getTitle() {
-		return _title;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	public void setTitle(String label) {
-		this._title = label;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public boolean isPublic() {
-		return _isPublic;
-	}
+    public void setTitle(String label) {
+        this.title = label;
+    }
 
-	public void setPublic(boolean isPublic) {
-		this._isPublic = isPublic;
-	}
+    public Long getCreatorId() {
+        return creatorId;
+    }
 
-	public TopicEntity toEntity() {
-		TopicEntity result = new TopicEntity();
-		result.setId(_id);
-		result.setTitle(_title);
-                result.setPublic(_isPublic);
-		return result;
-	}
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public boolean isPublicTopic() {
+        return publicTopic;
+    }
+
+    public void setPublicTopic(boolean publicTopic) {
+        this.publicTopic = publicTopic;
+    }
+
+    public TopicEntity toEntity() {
+        TopicEntity result = new TopicEntity();
+        result.setId(id);
+        result.setTitle(title);
+        result.setPublicTopic(publicTopic);
+        result.setCreatorId(creatorId);
+        return result;
+    }
 
 }

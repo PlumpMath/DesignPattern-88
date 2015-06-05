@@ -2,87 +2,84 @@ package com.forum.webapp.web.models;
 
 import java.util.Date;
 
-import org.hibernate.validator.NotNull;
-import org.hibernate.validator.Size;
-
 import com.forum.webapp.entities.MessageEntity;
 
 public class Message implements IModel {
 
-    private Long _id;
+    private Long id;
 
-    private String _text;
+    private String text;
 
-    private Date _dateAndTime;
+    private Date dateAndTime;
 
-    private Long _ownerId;
+    private Long ownerId;
 
-    private Long _topicId;
+    private Long topicId;
 
-    private User _owner;
+    private User owner;
 
     public Message() {
         super();
     }
 
     public Message(final MessageEntity entity) {
-        _id = entity.getId();
-        _text = entity.getText();
-        _dateAndTime = entity.getDateAndTime().getTime();
-        _ownerId = entity.getOwnerId();
-        _topicId = entity.getTopicId();
+        id = entity.getId();
+        text = entity.getText();
+        dateAndTime = entity.getDateAndTime().getTime();
+        ownerId = entity.getOwnerId();
+        topicId = entity.getTopicId();
     }
 
     public long getId() {
-        return _id;
+        return id;
     }
 
     public void setId(final Long id) {
-        _id = id;
+        this.id = id;
     }
 
     public String getText() {
-        return _text;
+        return text;
     }
 
     public void setText(String text) {
-        _text = text;
+        this.text = text;
     }
 
     public Date getDateAndTime() {
-        return _dateAndTime;
+        return dateAndTime;
     }
 
     public void setOwnerId(final Long userId) {
-        _ownerId = userId;
+        this.ownerId = userId;
     }
 
     public Long getOwnerId() {
-        return _ownerId;
+        return ownerId;
     }
 
     public Long getTopicId() {
-        return _topicId;
+        return topicId;
     }
 
     public void setTopicId(final Long topicId) {
-        _topicId = topicId;
+        this.topicId = topicId;
     }
 
     public User getOwner() {
-        return _owner;
+        return owner;
     }
 
     public void setOwner(final User user) {
-        _owner = user;
+        this.owner = user;
     }
 
     public MessageEntity toEntity() {
         MessageEntity result = new MessageEntity();
-        result.setId(_id);
-        result.setText(_text);
-        result.setOwnerId(_ownerId);
-        result.setTopicId(_topicId);
+        result.setId(id);
+        result.setText(text);
+        result.setOwnerId(ownerId);
+        result.setTopicId(topicId);
 
         return result;
     }

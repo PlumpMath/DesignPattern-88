@@ -13,66 +13,64 @@ import org.hibernate.annotations.NamedQuery;
 @Entity
 @Table(name = "users")
 @NamedQueries(value = {
-        @NamedQuery(name = "listUserIds", query = "select id from UserEntity"),
         @NamedQuery(name = "checkUniqueness", query = "select count(*) from UserEntity where email = :email"),
-		@NamedQuery(name = "login", query = "select id from UserEntity where email = :email and password = :password"),
-		@NamedQuery(name = "deleteUser", query = "delete from UserEntity where id = :id") })
+        @NamedQuery(name = "login", query = "select id from UserEntity where email = :email and password = :password") })
 public class UserEntity implements IEntity {
 
-	private Long _id;
+    private Long id;
 
-	private String _name;
+    private String name;
 
-	private String _firstName;
+    private String firstName;
 
-	private String _email;
+    private String email;
 
-	private String _password;
+    private String password;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
-		return _id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(final Long id) {
-		_id = id;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	@Column(name = "name", length = 100, nullable = false)
-	public String getName() {
-		return _name;
-	}
+    @Column(name = "name", length = 100, nullable = false)
+    public String getName() {
+        return name;
+    }
 
-	public void setName(final String name) {
-		_name = name;
-	}
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-	@Column(name = "firstName", length = 100, nullable = false)
-	public String getFirstName() {
-		return _firstName;
-	}
+    @Column(name = "firstName", length = 100, nullable = false)
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setFirstName(final String firstName) {
-		_firstName = firstName;
-	}
+    public void setFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
 
-	@Column(name = "email", length = 100, nullable = false, unique = true)
-	public String getEmail() {
-		return _email;
-	}
+    @Column(name = "email", length = 100, nullable = false, unique = true)
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(final String email) {
-		_email = email;
-	}
+    public void setEmail(final String email) {
+        this.email = email;
+    }
 
-	@Column(name = "password", length = 100, nullable = false)
-	public String getPassword() {
-		return _password;
-	}
+    @Column(name = "password", length = 100, nullable = false)
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(final String password) {
-		this._password = password;
-	}
+    public void setPassword(final String password) {
+        this.password = password;
+    }
 
 }

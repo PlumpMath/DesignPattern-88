@@ -2,34 +2,45 @@ package com.forum.webapp.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.springframework.stereotype.Repository;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.forum.webapp.dao.ITopicDao;
 import com.forum.webapp.entities.TopicEntity;
+import com.forum.webapp.repos.TopicRepository;
 
 @Transactional
-@Repository("topicDao")
-public class TopicDao extends CustomHibernateDaoSupport implements ITopicDao {
+@Component
+public class TopicDao implements ITopicDao {
 
-	public Long create(final TopicEntity entity) {
-		getSession().save(entity);
-		return entity.getId();
-	}
+    @Autowired
+    private TopicRepository repository;
 
-	public TopicEntity get(final Long id) {
-		return (TopicEntity) getSession().get(TopicEntity.class, id);
-	}
+    @Autowired
+    private EntityManager entityManager;
 
-	public void delete(final Long id) {
-		getSession().delete(get(id));
-	}
+    public Long create(final TopicEntity entity) {
+        repository.save(entity);
+        return entity.getId();
+    }
 
-	@SuppressWarnings("unchecked")
-	public List<TopicEntity> list(Long user) {
-		final Query query = getSession().getNamedQuery("listTopics").setLong("user", user);
-		return (List<TopicEntity>) query.list();
-	}
+    public TopicEntity get(final Long id) {
+        return repository.findOne(id);
+    }
+
+    public void delete(final Long id) {
+        repository.delete(id);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<TopicEntity> list(Long user) {
+        final Query query = entityManager.createNamedQuery("listTopics", TopicEntity.class);
+        query.setParameter("user", user);
+        return query.getResultList();
+    }
 
 }
