@@ -11,43 +11,38 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<test.server.host>localhost</test.server.host>
-		<test.server.port>38080</test.server.port>
+		<test.server.port>28080</test.server.port>
 		<jetty.port>28080</jetty.port>
-		
-        <java.version>1.7</java.version>
-		
+
+		<java.version>1.7</java.version>
+
 		<spring.version>4.1.6.RELEASE</spring.version>
-        <hibernate.version>4.3.8.Final</hibernate.version>
-        <hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
-        <spring.security.version>4.0.1.RELEASE</spring.security.version>
-        <spring.data.version>1.8.0.RELEASE</spring.data.version>
+		<hibernate.version>4.3.8.Final</hibernate.version>
+		<hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
+		<spring.security.version>4.0.1.RELEASE</spring.security.version>
+		<spring.data.version>1.8.0.RELEASE</spring.data.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
 		<cargo.version>1.4.9</cargo.version>
-        <!-- Version of javassist valid for Java 8. -->
-        <javassist.version>3.19.0-GA</javassist.version>
-        <log4j.version>2.2</log4j.version>
-        
-        <junit.version>4.11</junit.version>
+		<!-- Version of javassist valid for Java 8. -->
+		<javassist.version>3.19.0-GA</javassist.version>
+		<log4j.version>2.2</log4j.version>
+
+		<junit.version>4.11</junit.version>
 	</properties>
 
 
 	<dependencies>
 
-		<!-- Needed for the compilation, but provided by the container. -->  
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        
-        <!-- 
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency> -->
+		<!-- Needed for the compilation, but provided by the container. -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- <dependency> <groupId>javax</groupId> <artifactId>javaee-web-api</artifactId> 
+			<version>6.0</version> <scope>provided</scope> </dependency> -->
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
@@ -67,56 +62,56 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>${spring.data.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-orm</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        
-        <!-- ORM through Hibernate using JPA. -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>${javassist.version}</version>
-        </dependency>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring.data.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-orm</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+		<!-- ORM through Hibernate using JPA. -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>${javassist.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -125,48 +120,48 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
+			<version>${hibernate.version}</version>
 		</dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
-            <version>${hibernate.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>net.sf.ehcache</groupId>
-                    <artifactId>ehcache-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-web</artifactId>
-            <version>${log4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>18.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${hibernate.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>net.sf.ehcache</groupId>
+					<artifactId>ehcache-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-web</artifactId>
+			<version>${log4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>1.8.0.10</version>
 		</dependency>
-		
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.184</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-core</artifactId>
-            <version>3.1.2</version>
-        </dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.184</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.dropwizard.metrics</groupId>
+			<artifactId>metrics-core</artifactId>
+			<version>3.1.2</version>
+		</dependency>
 
 		<!-- For tests. -->
 		<dependency>
@@ -188,13 +183,13 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
-        <!-- To write assertions against the data returned by the repositories. -->
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
+		<!-- To write assertions against the data returned by the repositories. -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -232,20 +227,6 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.5</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.plugin.version}</version>
@@ -254,102 +235,13 @@
 					<httpConnector>
 						<port>${jetty.port}</port>
 					</httpConnector>
+					<stopKey>foo</stopKey>
+					<stopPort>9999</stopPort>
+					<webApp>
+						<contextPath>/webapp</contextPath>
+					</webApp>
 				</configuration>
 			</plugin>
-
-			<!-- Activez le plugin JMeter à partir d'ici. -->
-
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>${cargo.version}</version>
-				<executions>
-					<execution>
-						<id>start-container</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>stop-container</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<container>
-						<containerId>jetty9x</containerId>
-						<type>embedded</type>
-					</container>
-					<configuration>
-						<properties>
-							<cargo.servlet.port>${test.server.port}</cargo.servlet.port>
-							<cargo.logging>high</cargo.logging>
-						</properties>
-					</configuration>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>com.lazerycode.jmeter</groupId>
-				<artifactId>jmeter-maven-plugin</artifactId>
-				<version>1.8.1</version>
-				<executions>
-					<execution>
-						<id>jmeter-tests</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>jmeter</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<jmeterUserProperties>
-						<jmeterhostname>${test.server.host}</jmeterhostname>
-						<jmeterport>${test.server.port}</jmeterport>
-					</jmeterUserProperties>
-					<jmeterLogLevel>DEBUG</jmeterLogLevel>
-					<ignoreResultFailures>true</ignoreResultFailures>
-					<includes>
-						<include>Plan de test - complet.jmx</include>
-					</includes>
-				</configuration>
-			</plugin>
-
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>xml-maven-plugin</artifactId>
-				<version>1.0</version>
-				<executions>
-					<execution>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>transform</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<transformationSets>
-						<transformationSet>
-							<dir>${project.build.directory}/jmeter/results</dir>
-							<stylesheet>src/test/resources/jmeter-results-detail-report_21.xsl</stylesheet>
-							<outputDir>${project.build.directory}/site</outputDir>
-							<fileMappers>
-								<fileMapper
-									implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
-									<targetExtension>html</targetExtension>
-								</fileMapper>
-							</fileMappers>
-						</transformationSet>
-					</transformationSets>
-				</configuration>
-			</plugin>
-
-			<!-- Fin de l'activation du plugin JMeter -->
 		</plugins>
 
 		<finalName>${project.artifactId}</finalName>
@@ -357,7 +249,7 @@
 
 	<profiles>
 		<profile>
-			<id>dev</id>
+			<id>jmeter</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
@@ -365,17 +257,115 @@
 			<build>
 				<plugins>
 
-					<!-- Activez le plugin Selenium à partir d'ici. -->
-					<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>selenium-maven-plugin</artifactId> 
-						<version>2.3</version> <configuration> <browser>*firefox</browser> <suite>src/test/selenium/webapp.html</suite> 
-						<startURL>http://${test.server.host}:${test.server.port}/${project.artifactId}/</startURL> 
-						<port>14444</port> <background>true</background> </configuration> <executions> 
-						<execution> <id>SeleniumTest</id> <phase>integration-test</phase> <goals> 
-						<goal>selenese</goal> </goals> <configuration> <multiWindow>true</multiWindow> 
-						</configuration> </execution> </executions> <dependencies> <dependency> <groupId>org.codehaus.mojo</groupId> 
-						<artifactId>exec-maven-plugin</artifactId> <version>1.2.1</version> </dependency> 
-						</dependencies> </plugin> -->
-					<!-- Fin de l'activation du plugin Selenium -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.5</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.eclipse.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>${jetty.plugin.version}</version>
+						<configuration>
+							<scanIntervalSeconds>2</scanIntervalSeconds>
+							<httpConnector>
+								<port>${jetty.port}</port>
+							</httpConnector>
+							<stopKey>foo</stopKey>
+							<stopPort>9999</stopPort>
+						</configuration>
+						<executions>
+							<execution>
+								<id>jmeter-integration-tests-start</id>
+								<configuration>
+									<httpConnector>
+										<port>${test.server.port}</port>
+									</httpConnector>
+									<webApp>
+										<contextPath>/webapp</contextPath>
+									</webApp>
+								</configuration>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>start</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>jmeter-integration-tests-stop</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>com.lazerycode.jmeter</groupId>
+						<artifactId>jmeter-maven-plugin</artifactId>
+						<version>1.10.1</version>
+						<executions>
+							<execution>
+								<id>jmeter-tests</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>jmeter</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<jmeterUserProperties>
+								<jmeterhostname>${test.server.host}</jmeterhostname>
+								<jmeterport>${test.server.port}</jmeterport>
+							</jmeterUserProperties>
+							<jmeterLogLevel>DEBUG</jmeterLogLevel>
+							<ignoreResultFailures>true</ignoreResultFailures>
+							<includes>
+								<include>Plan de test - complet.jmx</include>
+							</includes>
+						</configuration>
+					</plugin>
+
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>xml-maven-plugin</artifactId>
+						<version>1.0</version>
+						<executions>
+							<execution>
+								<id>jmeter-reports-generation</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>transform</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<transformationSets>
+								<transformationSet>
+									<dir>${project.build.directory}/jmeter/results</dir>
+									<stylesheet>src/test/jmeter/jmeter-results-report_21.xsl</stylesheet>
+									<outputDir>${project.build.directory}/site</outputDir>
+									<fileMappers>
+										<fileMapper
+											implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+											<targetExtension>html</targetExtension>
+										</fileMapper>
+									</fileMappers>
+								</transformationSet>
+							</transformationSets>
+						</configuration>
+					</plugin>
+
 				</plugins>
 			</build>
 		</profile>
