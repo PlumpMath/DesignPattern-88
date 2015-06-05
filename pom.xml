@@ -232,7 +232,7 @@
 				<version>2.3.2</version>
 				<configuration>
 					<source>${java.version}</source>
-					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 
