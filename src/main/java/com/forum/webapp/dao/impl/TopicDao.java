@@ -38,7 +38,8 @@ public class TopicDao implements ITopicDao {
 
 	@SuppressWarnings("unchecked")
 	public List<TopicEntity> list(Long user) {
-		final Query query = entityManager.createNamedQuery("listTopics", TopicEntity.class);
+		final Query query = entityManager.createNamedQuery("listTopics",
+		        TopicEntity.class);
 		query.setParameter("user", user);
 		return query.getResultList();
 	}
