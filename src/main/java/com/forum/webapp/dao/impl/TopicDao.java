@@ -17,30 +17,30 @@ import com.forum.webapp.repos.TopicRepository;
 @Component
 public class TopicDao implements ITopicDao {
 
-    @Autowired
-    private TopicRepository repository;
+	@Autowired
+	private TopicRepository repository;
 
-    @Autowired
-    private EntityManager entityManager;
+	@Autowired
+	private EntityManager entityManager;
 
-    public Long create(final TopicEntity entity) {
-        repository.save(entity);
-        return entity.getId();
-    }
+	public Long create(final TopicEntity entity) {
+		repository.save(entity);
+		return entity.getId();
+	}
 
-    public TopicEntity get(final Long id) {
-        return repository.findOne(id);
-    }
+	public TopicEntity get(final Long id) {
+		return repository.findOne(id);
+	}
 
-    public void delete(final Long id) {
-        repository.delete(id);
-    }
+	public void delete(final Long id) {
+		repository.delete(id);
+	}
 
-    @SuppressWarnings("unchecked")
-    public List<TopicEntity> list(Long user) {
-        final Query query = entityManager.createNamedQuery("listTopics", TopicEntity.class);
-        query.setParameter("user", user);
-        return query.getResultList();
-    }
+	@SuppressWarnings("unchecked")
+	public List<TopicEntity> list(Long user) {
+		final Query query = entityManager.createNamedQuery("listTopics", TopicEntity.class);
+		query.setParameter("user", user);
+		return query.getResultList();
+	}
 
 }
