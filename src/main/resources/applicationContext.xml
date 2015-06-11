@@ -19,7 +19,8 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.forum.webapp" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
-	<jpa:repositories base-package="com.forum.webapp.repos" entity-manager-factory-ref="entityManagerFactory" />
+	<jpa:repositories base-package="com.forum.webapp.repos"
+		entity-manager-factory-ref="entityManagerFactory" />
 
 	<bean:bean id="transactionManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager">

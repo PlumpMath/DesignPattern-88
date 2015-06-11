@@ -33,10 +33,12 @@ HTML 4.01 Transitional//EN" />
 					white-space: nowrap;
 					}
 					h1 {
-					margin: 0px 0px 5px; font: 165% verdana,arial,helvetica
+					margin: 0px 0px 5px;
+					font: 165% verdana,arial,helvetica
 					}
 					h2 {
-					margin-top: 1em; margin-bottom: 0.5em; font: bold 125% verdana,arial,helvetica
+					margin-top: 1em;
+					margin-bottom: 0.5em; font: bold 125% verdana,arial,helvetica
 					}
 					h3 {
 					margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica
@@ -68,11 +70,12 @@ HTML 4.01 Transitional//EN" />
 					.page_details_expanded
 					{
 					display: block;
-					display/* hide this definition from IE5/6 */: table-row;
+					display/* hide this definition from IE5/6 */:
+					table-row;
 					}
-  
-  
-  			</style>
+
+
+				</style>
 				<script language="JavaScript"><![CDATA[
                              function expand(details_id)
   			   {

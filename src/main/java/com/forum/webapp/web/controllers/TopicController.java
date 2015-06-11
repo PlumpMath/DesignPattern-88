@@ -27,89 +27,91 @@ import com.forum.webapp.web.models.User;
 @SessionAttributes(NoSessionController.USER_SESSION_ATTRIBUTES)
 public class TopicController extends AbstractController {
 
-    private ITopicService topicService;
-    private IMessageService messageService;
-    private IUserService userService;
+	private ITopicService topicService;
+	private IMessageService messageService;
+	private IUserService userService;
 
-    @Autowired(required = true)
-    public void setTopicService(final ITopicService topicService) {
-        this.topicService = topicService;
-    }
+	@Autowired(required = true)
+	public void setTopicService(final ITopicService topicService) {
+		this.topicService = topicService;
+	}
 
-    @Autowired(required = true)
-    public void setMessageService(final IMessageService messageService) {
-        this.messageService = messageService;
-    }
+	@Autowired(required = true)
+	public void setMessageService(final IMessageService messageService) {
+		this.messageService = messageService;
+	}
 
-    @Autowired(required = true)
-    public void setUserService(final IUserService userService) {
-        this.userService = userService;
-    }
+	@Autowired(required = true)
+	public void setUserService(final IUserService userService) {
+		this.userService = userService;
+	}
 
-    @InitBinder
-    public void initBinder(final WebDataBinder binder) {
-    }
+	@InitBinder
+	public void initBinder(final WebDataBinder binder) {
+	}
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create(
-            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
-            throws Exception {
-        checkSession(user);
-        return "topic/create";
-    }
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public String create(
+	        @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
+	        throws Exception {
+		checkSession(user);
+		return "topic/create";
+	}
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView add(final Topic topic,
-            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
-            throws Exception {
-        checkSession(user);
-        topic.setCreatorId(user.getId());
-        final Long topicId = topicService.create(topic);
-        return get(topicId, user);
-    }
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public ModelAndView add(
+	        final Topic topic,
+	        @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
+	        throws Exception {
+		checkSession(user);
+		topic.setCreatorId(user.getId());
+		final Long topicId = topicService.create(topic);
+		return get(topicId, user);
+	}
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView list(
-            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
-            throws Exception {
-        checkSession(user);
-        final List<Topic> topics = topicService.list(user.getId());
-        final Map<String, Object> model = new HashMap<String, Object>();
-        model.put("topics", topics);
-        return new ModelAndView("topic/list", model);
-    }
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView list(
+	        @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
+	        throws Exception {
+		checkSession(user);
+		final List<Topic> topics = topicService.list(user.getId());
+		final Map<String, Object> model = new HashMap<String, Object>();
+		model.put("topics", topics);
+		return new ModelAndView("topic/list", model);
+	}
 
-    @RequestMapping(value = "/{topicId}", method = RequestMethod.GET)
-    public ModelAndView get(@PathVariable("topicId") final long topicId,
-            @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
-            throws Exception {
-        checkSession(user);
-        final Topic topic = topicService.get(topicId);
-        if (null == topic) {
-            final ModelAndView result = list(user);
-            result.getModel().put("messageKey", "topic.list.invalid.topic");
-            result.getModel().put("messageType", "error");
-            return result;
-        }
-        final List<Message> messages = messageService.list(topicId);
+	@RequestMapping(value = "/{topicId}", method = RequestMethod.GET)
+	public ModelAndView get(
+	        @PathVariable("topicId") final long topicId,
+	        @ModelAttribute(NoSessionController.USER_SESSION_ATTRIBUTES) final User user)
+	        throws Exception {
+		checkSession(user);
+		final Topic topic = topicService.get(topicId);
+		if (null == topic) {
+			final ModelAndView result = list(user);
+			result.getModel().put("messageKey", "topic.list.invalid.topic");
+			result.getModel().put("messageType", "error");
+			return result;
+		}
+		final List<Message> messages = messageService.list(topicId);
 
-        final Map<Long, User> users = new HashMap<Long, User>();
-        User owner;
-        for (Message message : messages) {
-            if (users.containsKey(message.getOwnerId())) {
-                owner = users.get(message.getOwnerId());
-            } else {
-                owner = userService.get(message.getOwnerId());
-                users.put(owner.getId(), owner);
-            }
-            message.setOwner(owner);
-        }
+		final Map<Long, User> users = new HashMap<Long, User>();
+		User owner;
+		for (Message message : messages) {
+			if (users.containsKey(message.getOwnerId())) {
+				owner = users.get(message.getOwnerId());
+			} else {
+				owner = userService.get(message.getOwnerId());
+				users.put(owner.getId(), owner);
+			}
+			message.setOwner(owner);
+		}
 
-        final Map<String, Object> model = new HashMap<String, Object>();
-        model.put("topic", topic);
-        model.put("topicMessages", messages);
+		final Map<String, Object> model = new HashMap<String, Object>();
+		model.put("topic", topic);
+		model.put("topicMessages", messages);
 
-        return new ModelAndView("topic/view", model);
-    }
+		return new ModelAndView("topic/view", model);
+	}
 
 }

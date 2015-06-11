@@ -38,9 +38,10 @@
 	<br />
 	<table class="list">
 		<c:if test="${empty topicMessages}">
-		<tr>
-				<td class="header" colspan="2"><fmt:message key="topic.view.empty" /></td>
-		</tr>
+			<tr>
+				<td class="header" colspan="2"><fmt:message
+						key="topic.view.empty" /></td>
+			</tr>
 		</c:if>
 		<c:forEach items="${topicMessages}" var="message">
 			<fmt:formatDate value="${message.dateAndTime}" type="date"
@@ -48,17 +49,15 @@
 			<fmt:formatDate value="${message.dateAndTime}" type="time"
 				dateStyle="short" var="messageTime" />
 			<tr>
-				<td class="header">
-					<fmt:message key="topic.view.header" >
+				<td class="header"><fmt:message key="topic.view.header">
 						<fmt:param value="${message.owner.firstName}" />
 						<fmt:param value="${message.owner.name}" />
 						<fmt:param value="${messageDate}" />
 						<fmt:param value="${messageTime}" />
 					</fmt:message></td>
 				<td class="content">
-					<%-- Corriger la faille ci-dessous : --%>
-					<c:set var="messageText"  value="${message.text}" scope="request" />
-					<%= request.getAttribute("messageText")%>
+					<%-- Corriger la faille ci-dessous : --%> <c:set var="messageText"
+						value="${message.text}" scope="request" /> <%= request.getAttribute("messageText")%>
 					<%-- Fin du code à corriger. --%>
 				</td>
 			</tr>
@@ -68,18 +67,17 @@
 			action="<%=request.getContextPath()%>/html/message">
 			<tr>
 				<td class="label"><fmt:message key="topic.view.createmessage" /></td>
-				<td><input type="hidden" name="topicId" value="<c:out value="${topic.id}" />" />
-				<textarea name="text" rows="8" style="width:100%"></textarea>
-				<br />
-				<input type="submit"
-					value="<fmt:message key="topic.view.post" />" />
-				</td>
+				<td><input type="hidden" name="topicId"
+					value="<c:out value="${topic.id}" />" /> <textarea name="text"
+						rows="8" style="width: 100%"></textarea> <br /> <input
+					type="submit" value="<fmt:message key="topic.view.post" />" /></td>
 			</tr>
 		</form>
 	</table>
 
 
-<br />
-<a href="<%=request.getContextPath()%>/html/logout"><fmt:message key="logout.link" /></a>
+	<br />
+	<a href="<%=request.getContextPath()%>/html/logout"><fmt:message
+			key="logout.link" /></a>
 </body>
 </html>
